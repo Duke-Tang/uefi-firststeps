@@ -1,0 +1,37 @@
+## @file
+#  SysInfoApp — a minimal UEFI_APPLICATION module.
+#
+#  The .inf is the build "contract": it tells the EDK II build system what
+#  kind of module this is, where the source lives, which packages it depends
+#  on, and which library classes it needs. The build then resolves each
+#  library class to a concrete library instance using the active .dsc.
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = SysInfoApp
+  FILE_GUID                      = 7a1c0e64-2b3d-4f5a-9c8b-1d2e3f4a5b6c
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 0.1
+  ENTRY_POINT                    = UefiMain          # must match the C function name
+
+[Sources]
+  SysInfoApp.c
+
+#
+# [Packages] lists the .dec files whose headers/GUIDs this module may use.
+# MdePkg is the base UEFI package — it provides <Uefi.h> and the library
+# class declarations below.
+#
+[Packages]
+  MdePkg/MdePkg.dec
+
+#
+# [LibraryClasses] names abstract library *classes*. The concrete instance
+# that satisfies each one is chosen by the .dsc, not here. That indirection
+# is what lets the same source build against different platforms.
+#
+[LibraryClasses]
+  UefiApplicationEntryPoint        # provides _ModuleEntryPoint, calls UefiMain
+  UefiLib                          # Print()
+  UefiBootServicesTableLib         # gST, gBS, gImageHandle

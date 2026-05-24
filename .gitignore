@@ -1,0 +1,7 @@
+# EDK II build output
+Build/
+Conf/
+*.efi
+*.debug
+edk2/
+/tmp/esp/
